@@ -1181,16 +1181,28 @@ class StarLog(SimSnap):
 
 
         if (iSize > file_structure.itemsize):
-            file_structure = np.dtype({'names': ("iord", "iorderGas", "tform",
-                                             "x", "y", "z",
-                                             "vx", "vy", "vz",
-                                             "massform", "rhoform", "tempform","tcoolform"),
-                                   'formats': ('i4', 'i4', 'f8',
-                                               'f8', 'f8', 'f8',
-                                               'f8', 'f8', 'f8',
-                                               'f8', 'f8', 'f8','f8')})
-            tcool = True
-            print "cooling times found!"
+            if 'BH' in self._filename:
+                file_structure = np.dtype({'names': ("iord", "iorderGas", "tform",
+                                                 "x", "y", "z",
+                                                 "vx", "vy", "vz",
+                                                 "massform", "rhoform", "tempform","tcoolform"),
+                                       'formats': ('i4', 'i4', 'f8',
+                                                   'f8', 'f8', 'f8',
+                                                   'f8', 'f8', 'f8',
+                                                   'f8', 'f8', 'f8','f8')})
+                tcool = True
+                print "cooling times found!"
+            else:
+                file_structure = np.dtype({'names': ("iord", "iorderGas",
+                                                 "tform",
+                                                 "x", "y", "z",
+                                                 "vx", "vy", "vz",
+                                                 "massform", "rhoform", "tempform"),
+                                           'formats': ('i8', 'i8', 'f8',
+                                                       'f8', 'f8', 'f8',
+                                                       'f8', 'f8', 'f8',
+                                                       'f8', 'f8', 'f8')})
+                print "assuming no BH with big iOrds"
         if (iSize > file_structure.itemsize):
             file_structure = np.dtype({'names': ("iord", "iorderGas", "tform",
                                              "x", "y", "z",
