@@ -1328,7 +1328,7 @@ class StarLog(SimSnap):
             if bigstarlog:
                 self._create_arrays(["phiform", "nsmooth"])
 
-            self._decorate()
+        self._decorate()
 
         if sort:
             for name in file_structure.fields.keys():
